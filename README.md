@@ -61,7 +61,7 @@ Instead of gii generated files for every model,I wrote a reusable behavior that 
  label_property is the model property that will show as label in the tree nodes.
  rel_property is the model property that will be used as value for the rel property of the li tags in the tree markup.
 
- - Last, add an action actionTree in Category Controller that renders a tree.php file.In tree.php file render the JsTreeWidget like so
+- Last, add an action actionTree in Category Controller that renders a tree.php file.In tree.php file render the JsTreeWidget like so
  
  ~~~
  $this->widget('application.widgets.JsTreeWidget',
@@ -75,21 +75,21 @@ Instead of gii generated files for every model,I wrote a reusable behavior that 
   
  Fot themes and plugins options see [jtree documentation](http://www.jstree.com/documentation)
 
- - Make sure you include jquery.Either uncomment the relevant line in JsTreeWidget or register it somewhwere else in your code.
- - Example files use bootstrap styled markup.Uncomment the relevant line that registers bootstrap.css in JsTreeWidget
+- Make sure you include jquery.Either uncomment the relevant line in JsTreeWidget or register it somewhwere else in your code.
+- Example files use bootstrap styled markup.Uncomment the relevant line that registers bootstrap.css in JsTreeWidget
    if it's not already registered somewhere else in your application.
- - Example files provided.
- - To manipulate the tree,navigate to category/tree.Right click on nodes to see available operations.Drag and drop nodes,delete,create,update etc.
+- Example files provided.
+- To manipulate the tree,navigate to category/tree.Right click on nodes to see available operations.Drag and drop nodes,delete,create,update etc.
 
 
     ##Resources
- - [jsTree ](http://www.jstree.com/)
- - [NestedSetBehavior](http://www.yiiframework.com/extension/nestedsetbehavior)
- - [Fancybox](http://www.fancyapps.com/fancybox/)
- - [Noty](http://needim.github.com/noty/)
- - [Bootstrap](http://twitter.github.com/bootstrap/)
- - [JQueryForm Plugin]( http://malsup.com/jquery/form/)
- - [spin.js](http://fgnass.github.com/spin.js/)
+- [jsTree ](http://www.jstree.com/)
+- [NestedSetBehavior](http://www.yiiframework.com/extension/nestedsetbehavior)
+- [Fancybox](http://www.fancyapps.com/fancybox/)
+- [Noty](http://needim.github.com/noty/)
+- [Bootstrap](http://twitter.github.com/bootstrap/)
+- [JQueryForm Plugin]( http://malsup.com/jquery/form/)
+- [spin.js](http://fgnass.github.com/spin.js/)
 
 
 
