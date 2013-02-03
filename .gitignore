@@ -1,0 +1,5 @@
+﻿# Git Ignore for InfoWebSphere Project Spiros Kabasakalis.@2012 
+
+backup.bat
+start_repo.bat
+push.bat
