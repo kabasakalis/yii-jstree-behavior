@@ -23,7 +23,7 @@ class BaseController extends CController
 
     public function  init()
     {
-        parent::init;
+        parent::init();
     }
 
     /**

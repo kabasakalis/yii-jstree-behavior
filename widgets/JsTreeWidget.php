@@ -88,10 +88,10 @@ EOD;
         Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/layouts/center.js', CClientScript::POS_END);
         Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/themes/default.js', CClientScript::POS_END);
         //js spinner
-        cs()->registerScriptFile($baseUrl . '/js_plugins/spin.min.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/spin.min.js', CClientScript::POS_END);
         //fancybox
-        cs()->registerScriptFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.js', CClientScript::POS_END);
-        cs()->registerCssFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.css');
+       Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.js', CClientScript::POS_END);
+        Yii::app()->clientScript->registerCssFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.css');
 
         Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/json2/json2.js');
 
