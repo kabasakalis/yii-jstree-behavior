@@ -23,7 +23,7 @@ Instead of gii generated files for every model,I wrote a reusable behavior that 
  column to store the label for the tree nodes,for example "name",and a primary key.You can add more columns,(like "description")
 - Create the ActiveRecord class file that corresponds to category,say Category.php.Give it a nested set behavior.In Category.php :
 
- ~~~
+ ~~~ php
  public function behaviors()
 {
    return array(
@@ -41,7 +41,7 @@ Instead of gii generated files for every model,I wrote a reusable behavior that 
 - Copy  BaseController.php file to components folder.This controller makes possible for controllers that extend from it to turn behavior inherited functions
  into actions.
 - Create a controller in protected/controllers folder  that extends from BaseController.php,CategoryController  and give it a JsTreeBehavior.In CategoryController:
- ~~~
+ ~~~ php
   public function behaviors()
      {
          return array(
@@ -63,7 +63,7 @@ Instead of gii generated files for every model,I wrote a reusable behavior that 
 
 - Last, add an action actionTree in Category Controller that renders a tree.php file.In tree.php file render the JsTreeWidget like so
  
- ~~~
+ ~~~ php
  $this->widget('application.widgets.JsTreeWidget',
                        array('modelClassName' => 'Category',
                                  'jstree_container_ID' => 'Category-wrapper',//jstree will be rendered in this div.id of your choice.
