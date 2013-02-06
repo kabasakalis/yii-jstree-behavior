@@ -41,7 +41,7 @@ Instead of gii generated files for every model,I wrote a reusable behavior that 
 - Copy  BaseController.php file to components folder.This controller makes possible for controllers that extend from it to turn behavior inherited functions
  into actions.
 - Create a controller in protected/controllers folder  that extends from BaseController.php,CategoryController  and give it a JsTreeBehavior.In CategoryController:
- ~~~
+ ~~~ php
   public function behaviors()
      {
          return array(
