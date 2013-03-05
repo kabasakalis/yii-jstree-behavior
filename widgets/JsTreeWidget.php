@@ -56,7 +56,11 @@ class JsTreeWidget extends CWidget
         $plugins = json_encode($this->plugins);
 
         //assuming that we use the widget in  controller with JsTreeBehavior
-        $controllerID = $this->controller->id;
+        if(isset($this->controller->module)){
+            $controllerID = $this->controller->module->id."/".$this->controller->id;
+        }else{
+            $controllerID = $this->controller->id;
+        }
 
         //pass php variables to javascript
         $jstree_behavior_js = <<<EOD
