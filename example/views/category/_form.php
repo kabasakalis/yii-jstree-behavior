@@ -20,7 +20,7 @@
 <h3><?php echo Yii::t('global', 'Update') ?> <?php echo Yii::t('global', $modelClassName) ?></h3>
 <?php endif; ?>
 
-<p> <h2><?php //echo $model->name;?></h2></p>
+<p> <h2><?php //echo $model->name;?></h2><p>
 
 <?php      $val_error_msg = Yii::t('global', "Error.$modelClassName  was not saved.");
                    $val_success_message = ($model->isNewRecord) ?
@@ -43,8 +43,8 @@
     $formId = "$modelClassName-form";
 
     $actionUrl=($model->isNewRecord)?
-                 ( ($_POST['create_root']!='true')?CController::createUrl($this->id.'/createnode'):CController::createUrl($this->id.'/createRoot')):
-                  CController::createUrl($this->id.'/updatenode');
+     (! isset($_POST['create_root'])?CController::createUrl($this->id.'/createnode'):CController::createUrl($this->id.'/createRoot')):
+    CController::createUrl($this->id.'/updatenode');
 
     $form = $this->beginWidget('CActiveForm', array(
                                                    'id' => $formId,
@@ -82,7 +82,8 @@
         <div class="control-group">
             <?php echo $form->labelEx($model, 'name', array('class' => 'control-label')); ?>
             <div class="controls">
-                <?php echo $form->textField($model, 'name', array('value'=>$_POST['name'],'class' => 'span4', 'size' => 60, 'maxlength' => 128)); ?>
+                <?php  $name=(!$model->isNewRecord)?$model->name:''  ?>
+                <?php echo $form->textField($model, 'name', array('value'=>$name,'class' => 'span4', 'size' => 60, 'maxlength' => 128)); ?>
                 <p class="help-block"><?php echo $form->error($model, 'name'); ?></p>
             </div>
         </div>
@@ -97,11 +98,11 @@
 
         <input type="hidden" name="YII_CSRF_TOKEN"
                value="<?php echo Yii::app()->request->csrfToken; ?>"/>
-        <input type="hidden" name= "parent_id" value="<?php echo $_POST['parent_id']; ?>"  />
+        <input type="hidden" name= "parent_id" value="<?php echo isset($_POST['parent_id'])?$_POST['parent_id']:''; ?>"  />
 
         <?php  if (!$model->isNewRecord): ?>
         <input type="hidden" name="update_id"
-               value=" <?php echo $model->id; ?>"/>
+               value="<?php echo $model->id; ?>"/>
         <?php endif; ?>
         <div class="control-group">
             <?php   echo CHtml::submitButton($model->isNewRecord ? Yii::t('global', 'Submit')
