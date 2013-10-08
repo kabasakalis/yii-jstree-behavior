@@ -32,10 +32,9 @@ $(function () {
         left:'auto' // Left position relative to parent in px
     };
     var spinnertarget = document.getElementById(JsTreeBehavior.container_ID);
-    var spinner = new Spinner(spinnneropts)
+    var spinner = new Spinner(spinnneropts);
 
-    $("#" + JsTreeBehavior.container_ID)
-        .jstree({
+	var jsTreeOptions = $.extend(true, {
             // the `plugins` array allows you to configure the active plugins on this instance
             "plugins":JsTreeBehavior.plugins,
             // each plugin you have included can have its own config object
@@ -167,7 +166,10 @@ $(function () {
                 }
             }//items
             } //context menu
-        })  //jstree
+        }, JsTreeBehavior.options);
+
+    $("#" + JsTreeBehavior.container_ID)
+        .jstree(jsTreeOptions)  //jstree
 
         ///EVENTS
         .bind("select_node.jstree", function (event, data) {
