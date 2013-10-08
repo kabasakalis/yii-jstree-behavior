@@ -39,6 +39,11 @@ class JsTreeWidget extends CWidget
     public $plugins = array('themes', 'html_data', 'contextmenu', 'crrm', 'dnd', 'cookies','ui');
 
 
+	/**
+	 * @var array JsTree configuration. 
+	 * Any options set here will will be merged with the default options defined in js_plugins/jstree.behavior.js
+	 * If a default option is set and corresponds to an item set here, the value in this array will take precedence.
+	 */
 	public $options=array();
 
     public function init()
