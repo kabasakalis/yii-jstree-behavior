@@ -39,6 +39,7 @@ class JsTreeWidget extends CWidget
     public $plugins = array('themes', 'html_data', 'contextmenu', 'crrm', 'dnd', 'cookies','ui');
 
 
+	public $options=array();
 
     public function init()
     {
@@ -62,6 +63,8 @@ class JsTreeWidget extends CWidget
             $controllerID = $this->controller->id;
         }
 
+        $options = json_encode($this->options);
+
         //pass php variables to javascript
         $jstree_behavior_js = <<<EOD
       (function ($) {
@@ -71,6 +74,7 @@ class JsTreeWidget extends CWidget
             open_nodes:$open_nodes,
             themes:$themes,
             plugins:$plugins,
+            options:$options,
               },
          Yii_js = {
            baseUrl:'$baseUrl',
