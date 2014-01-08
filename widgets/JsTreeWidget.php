@@ -49,12 +49,6 @@ class JsTreeWidget extends CWidget
     private function register_Js_Css()
     {
 
-        $baseUrl = Yii::app()->baseUrl;
-        $csrf = Yii::app()->request->csrfToken;
-        $open_nodes = $this->getOpenNodes();
-        $themes = json_encode($this->themes);
-        $plugins = json_encode($this->plugins);
-
         //assuming that we use the widget in  controller with JsTreeBehavior
         if(isset($this->controller->module)){
             $controllerID = $this->controller->module->id."/".$this->controller->id;
@@ -63,50 +57,55 @@ class JsTreeWidget extends CWidget
         }
 
         //pass php variables to javascript
-        $jstree_behavior_js = <<<EOD
-      (function ($) {
-          JsTreeBehavior = {
-           controllerID:'$controllerID',
-            container_ID:'$this->jstree_container_ID',
-            open_nodes:$open_nodes,
-            themes:$themes,
-            plugins:$plugins,
-              },
-         Yii_js = {
-           baseUrl:'$baseUrl',
-           csrf:'$csrf'
-           }
-      }(jQuery));
-EOD;
+        $jstree_behavior_js = '(function ($) { JsTreeBehavior = ' . json_encode(array(
+                'controllerID' => $controllerID,
+                'container_ID' => $this->id,
+                'open_nodes' => $this->getOpenNodes(),
+                'themes' => $this->themes,
+                'plugins' => $this->plugins,
+                'urlFormat' => Yii::app()->urlManager->urlFormat,
+                'csrfToken' => Yii::app()->request->csrfToken,
+                'url' => array(
+                    'fetchTree' => Yii::app()->createUrl($controllerID . '/fetchTree'),
+                    'returnForm' => Yii::app()->createUrl($controllerID . '/returnForm'),
+                    'returnView' => Yii::app()->createUrl($controllerID . '/returnView'),
+                    'rename' => Yii::app()->createUrl($controllerID . '/rename'),
+                    'remove' => Yii::app()->createUrl($controllerID . '/remove'),
+                    'moveCopy' => Yii::app()->createUrl($controllerID . '/moveCopy'),
+                ),
+            )) . '; }(jQuery));';
+
+        $baseUrl = Yii::app()->baseUrl;
+		$clientScript = Yii::app()->clientScript;
 
         //uncomment to register jquery only if you have not already registered it somewhere else in your application
-        //Yii::app()->clientScript->registerCoreScript('jquery');
+        //$clientScript->registerCoreScript('jquery');
 
         //uncomment to register bootstrap css if you have not already included  it (optional),or else you will have to style the html by yourself.
-        //Yii::app()->clientScript->registerCssFile($baseUrl . '/js_plugins/bootstrap/css/bootstrap.css');
-        Yii::app()->clientScript->registerCoreScript('cookie');
-        Yii::app()->clientScript->registerScript(__CLASS__ . 'jstree_behavior_params', $jstree_behavior_js, CClientScript::POS_END);
+        //$clientScript->registerCssFile($baseUrl . '/js_plugins/bootstrap/css/bootstrap.css');
+        $clientScript->registerCoreScript('cookie');
+        $clientScript->registerScript(__CLASS__ . 'jstree_behavior_params', $jstree_behavior_js, CClientScript::POS_END);
 
         //modal dialog with noty.js
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/jquery.noty.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/layouts/center.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/themes/default.js', CClientScript::POS_END);
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/jquery.noty.js', CClientScript::POS_END);
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/layouts/center.js', CClientScript::POS_END);
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/noty/js/noty/themes/default.js', CClientScript::POS_END);
         //js spinner
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/spin.min.js', CClientScript::POS_END);
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/spin.min.js', CClientScript::POS_END);
         //fancybox
-       Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerCssFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.css');
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.js', CClientScript::POS_END);
+        $clientScript->registerCssFile($baseUrl . '/js_plugins/fancybox2/jquery.fancybox.css');
 
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/json2/json2.js');
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/json2/json2.js');
 
-        Yii::app()->clientScript->registerCoreScript('yiiactiveform');
+        $clientScript->registerCoreScript('yiiactiveform');
 
         // jquery.form.js plugin http://malsup.com/jquery/form/
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/ajaxform/jquery.form.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/ajaxform/form.js', CClientScript::POS_END);
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/ajaxform/jquery.form.js', CClientScript::POS_END);
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/ajaxform/form.js', CClientScript::POS_END);
         //jstree
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/jstree/jquery.jstree.js', CClientScript::POS_END);
-        Yii::app()->clientScript->registerScriptFile($baseUrl . '/js_plugins/jstree.behavior.js', CClientScript::POS_END);
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/jstree/jquery.jstree.js', CClientScript::POS_END);
+        $clientScript->registerScriptFile($baseUrl . '/js_plugins/jstree.behavior.js', CClientScript::POS_END);
     }
 
     /**
