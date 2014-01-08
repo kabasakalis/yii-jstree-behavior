@@ -46,11 +46,11 @@ $(function () {
             "html_data":{
                 "ajax":{
                     "type":"POST",
-                    "url":Yii_js.baseUrl + "/" + JsTreeBehavior.controllerID + "/fetchTree",
+                    "url":JsTreeBehavior.url.fetchTree,
                     "data":function (n) {
                         return {
                             id:n.attr ? n.attr("id") : 0,
-                            "YII_CSRF_TOKEN":Yii_js.csrf
+                            "YII_CSRF_TOKEN":JsTreeBehavior.csrfToken
                         };
                     }
                 }
@@ -69,10 +69,10 @@ $(function () {
                         id = obj.attr("id").replace("node_", "");
                         $.ajax({
                             type:"POST",
-                            url:Yii_js.baseUrl + "/" + JsTreeBehavior.controllerID + "/returnForm",
+                            url:JsTreeBehavior.url.returnForm,
                             data:{
                                 'update_id':id,
-                                "YII_CSRF_TOKEN":Yii_js.csrf
+                                "YII_CSRF_TOKEN":JsTreeBehavior.csrfToken
                             },
                             'beforeSend':function () {
                                 spinner.spin(spinnertarget);
@@ -102,10 +102,10 @@ $(function () {
                         id = obj.attr("id").replace("node_", "")
                         $.ajax({
                             type:"POST",
-                            url:Yii_js.baseUrl + "/" + JsTreeBehavior.controllerID + "/returnView",
+                            url:JsTreeBehavior.url.returnView,
                             data:{
                                 "id":id,
-                                "YII_CSRF_TOKEN":Yii_js.csrf
+                                "YII_CSRF_TOKEN":JsTreeBehavior.csrfToken
                             },
                             beforeSend:function () {
                                 spinner.spin(spinnertarget);
@@ -181,11 +181,11 @@ $(function () {
         .bind("rename.jstree", function (e, data) {
             $.ajax({
                 type:"POST",
-                url:Yii_js.baseUrl + "/" + JsTreeBehavior.controllerID + "/rename",
+                url:JsTreeBehavior.url.rename,
                 data:{
                     "id":data.rslt.obj.attr("id").replace("node_", ""),
                     "new_name":data.rslt.new_name,
-                    "YII_CSRF_TOKEN":Yii_js.csrf
+                    "YII_CSRF_TOKEN":JsTreeBehavior.csrfToken
                 },
                 beforeSend:function () {
                     spinner.spin(spinnertarget);
@@ -208,10 +208,10 @@ $(function () {
         .bind("remove.jstree", function (e, data) {
             $.ajax({
                 type:"POST",
-                url:Yii_js.baseUrl + "/" + JsTreeBehavior.controllerID + "/remove",
+                url:JsTreeBehavior.url.remove,
                 data:{
                     "id":data.rslt.obj.attr("id").replace("node_", ""),
-                    "YII_CSRF_TOKEN":Yii_js.csrf
+                    "YII_CSRF_TOKEN":JsTreeBehavior.csrfToken
                 },
                 beforeSend:function () {
                     spinner.spin(spinnertarget);
@@ -234,10 +234,10 @@ $(function () {
             parent_id = data.rslt.parent.attr("id").replace("node_", "");
             $.ajax({
                 type:"POST",
-                url:Yii_js.baseUrl + "/" + JsTreeBehavior.controllerID + "/returnForm",
+                url:JsTreeBehavior.url.returnForm,
                 data:{   'name':newname,
                     'parent_id':parent_id,
-                    "YII_CSRF_TOKEN":Yii_js.csrf
+                    "YII_CSRF_TOKEN":JsTreeBehavior.csrfToken
                 },
                 beforeSend:function () {
                     spinner.spin(spinnertarget);
@@ -307,7 +307,7 @@ $(function () {
                 $.ajax({
                     async:false,
                     type:'POST',
-                    url:Yii_js.baseUrl + "/" + JsTreeBehavior.controllerID + "/moveCopy",
+                    url:JsTreeBehavior.url.moveCopy,
 
                     data:{
                         "moved_node":moved_node,
@@ -320,7 +320,7 @@ $(function () {
                         "copy":copy,
                         "copied_node":copied_node,
                         "replaced_node":replaced_node,
-                        "YII_CSRF_TOKEN":Yii_js.csrf
+                        "YII_CSRF_TOKEN":JsTreeBehavior.csrfToken
                     },
                     beforeSend:function () {
                         spinner.spin(spinnertarget);
@@ -356,10 +356,10 @@ $(function () {
     $("#add_root").click(function () {
         $.ajax({
             type:'POST',
-            url:Yii_js.baseUrl + "/" + JsTreeBehavior.controllerID + "/returnForm",
+            url:JsTreeBehavior.url.returnForm,
             data:{
                 "create_root":true,
-                "YII_CSRF_TOKEN":Yii_js.csrf
+                "YII_CSRF_TOKEN":JsTreeBehavior.csrfToken
             },
             beforeSend:function () {
                 spinner.spin(spinnertarget);
